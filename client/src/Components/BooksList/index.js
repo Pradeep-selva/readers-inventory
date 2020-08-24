@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql } from "react-apollo";
 import { getBooksQuery } from "../../graphql";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 
 const BooksList = ({ data, showDetails, setBookID }) => {
   const handleShow = (id) => {
@@ -12,7 +12,12 @@ const BooksList = ({ data, showDetails, setBookID }) => {
   return (
     <>
       {data.loading ? (
-        <h4>loading books...</h4>
+        <Spinner
+          animation='grow'
+          variant='light'
+          size='lg'
+          className='spinner'
+        />
       ) : (
         data.books.map((book) => (
           <Button

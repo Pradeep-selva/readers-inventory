@@ -1,7 +1,13 @@
 import React from "react";
 import { graphql } from "react-apollo";
 import { getBookQuery } from "../../graphql";
-import { Button, Container, Jumbotron, ListGroup } from "react-bootstrap";
+import {
+  Button,
+  Container,
+  Jumbotron,
+  ListGroup,
+  Spinner
+} from "react-bootstrap";
 
 const ShowBookDetails = ({ data, goBack }) => {
   const { book } = data;
@@ -10,7 +16,12 @@ const ShowBookDetails = ({ data, goBack }) => {
   return (
     <>
       {data.loading ? (
-        <h4 className='text-light'>loading book details...</h4>
+        <Spinner
+          animation='grow'
+          variant='light'
+          size='lg'
+          className='spinner'
+        />
       ) : (
         <Container className='text-light'>
           <h1>{book.name}</h1>
