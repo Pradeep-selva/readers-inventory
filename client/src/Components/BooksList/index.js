@@ -3,7 +3,6 @@ import { graphql } from "react-apollo";
 import { getBooksQuery } from "../../graphql";
 
 const BooksList = ({ data }) => {
-  console.log(data);
   return (
     <>
       {data.loading ? (

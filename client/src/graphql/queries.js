@@ -8,3 +8,12 @@ export const getBooksQuery = gql`
     }
   }
 `;
+
+export const getAuthorsQuery = gql`
+  {
+    authors {
+      name
+      id
+    }
+  }
+`;
