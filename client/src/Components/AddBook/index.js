@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import { graphql } from "react-apollo";
-import { getAuthorsQuery } from "../../graphql";
+import compose from "lodash.flowright";
+import { getAuthorsQuery, addBookMutation, getBooksQuery } from "../../graphql";
 import { Modal, Form, Row, Col, Button, Toast } from "react-bootstrap";
 
-const AddBook = ({ show, data, handleClose }) => {
+const AddBook = ({ show, getAuthorsQuery, addBookMutation, handleClose }) => {
   const [name, setName] = useState("");
   const [genre, setGenre] = useState("");
   const [authorID, setAuthorID] = useState("");
   const [toastShow, setToastShow] = useState(false);
 
   const handleSubmit = () => {
-    const fields = {
-      name,
-      genre,
-      authorID
-    };
+    addBookMutation({
+      variables: {
+        name,
+        genre,
+        authorID
+      },
+      refetchQueries: [{ query: getBooksQuery }]
+    });
 
-    console.log(fields);
     handleClose();
     setToastShow(true);
   };
@@ -64,8 +67,8 @@ const AddBook = ({ show, data, handleClose }) => {
                   onChange={(event) => setAuthorID(event.target.value)}
                 >
                   <option>Select an author...</option>
-                  {!data.loading &&
-                    data.authors.map((author) => (
+                  {!getAuthorsQuery.loading &&
+                    getAuthorsQuery.authors.map((author) => (
                       <option key={author.id} value={author.id}>
                         {author.name}
                       </option>
@@ -102,4 +105,8 @@ const AddBook = ({ show, data, handleClose }) => {
   );
 };
 
-export default graphql(getAuthorsQuery)(AddBook);
+// export default graphql(getAuthorsQuery)(AddBook);
+export default compose(
+  graphql(getAuthorsQuery, { name: "getAuthorsQuery" }),
+  graphql(addBookMutation, { name: "addBookMutation" })
+)(AddBook);

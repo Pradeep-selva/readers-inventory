@@ -3,7 +3,8 @@ import { Jumbotron, Container, Button } from "react-bootstrap";
 import { BooksList, AddBook } from "../index";
 
 const App = () => {
-  const [show, setShow] = useState(false);
+  const [showAddBook, setShowAddBook] = useState(false);
+  const [showAddAuthor, setShowAddAuthor] = useState(false);
 
   return (
     <Container>
@@ -13,12 +14,12 @@ const App = () => {
         <Button
           variant='outline-primary'
           className='add-book'
-          onClick={() => setShow(true)}
+          onClick={() => setShowAddBook(true)}
         >
           Add book
         </Button>
       </Jumbotron>
-      <AddBook show={show} handleClose={() => setShow(false)} />
+      <AddBook show={showAddBook} handleClose={() => setShowAddBook(false)} />
       <BooksList />
     </Container>
   );
