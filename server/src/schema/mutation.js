@@ -1,9 +1,8 @@
 const {
   GraphQLObjectType,
-  GraphQLID,
-  GraphQLList,
   GraphQLString,
-  GraphQLInt
+  GraphQLInt,
+  GraphQLNonNull
 } = require("graphql");
 const { BookType, AuthorType } = require("./types");
 const { Author, Book } = require("../models");
@@ -15,10 +14,10 @@ module.exports = new GraphQLObjectType({
       type: AuthorType,
       args: {
         name: {
-          type: GraphQLString
+          type: GraphQLNonNull(GraphQLString)
         },
         age: {
-          type: GraphQLInt
+          type: GraphQLNonNull(GraphQLInt)
         }
       },
       resolve(parent, args) {
@@ -28,6 +27,29 @@ module.exports = new GraphQLObjectType({
         });
 
         return author.save();
+      }
+    },
+    addBook: {
+      type: BookType,
+      args: {
+        name: {
+          type: GraphQLNonNull(GraphQLString)
+        },
+        genre: {
+          type: GraphQLNonNull(GraphQLString)
+        },
+        authorID: {
+          type: GraphQLNonNull(GraphQLString)
+        }
+      },
+      resolve(parent, args) {
+        const book = new Book({
+          name: args.name,
+          genre: args.genre,
+          authorID: args.authorID
+        });
+
+        return book.save();
       }
     }
   }

@@ -13,7 +13,7 @@ module.exports = new GraphQLObjectType({
         }
       },
       resolve(parent, args) {
-        return null;
+        return Book.findById(args.id);
       }
     },
     author: {
@@ -24,19 +24,19 @@ module.exports = new GraphQLObjectType({
         }
       },
       resolve(parent, args) {
-        return null;
+        return Author.findById(args.id);
       }
     },
     books: {
       type: GraphQLList(BookType),
       resolve(parent, args) {
-        return null;
+        return Book.find({});
       }
     },
     authors: {
       type: GraphQLList(AuthorType),
       resolve(parent, args) {
-        return null;
+        return Author.find({});
       }
     }
   }
