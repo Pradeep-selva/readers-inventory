@@ -5,6 +5,7 @@ import { BooksList, AddBook, AddAuthor } from "../index";
 const App = () => {
   const [showAddBook, setShowAddBook] = useState(false);
   const [showAddAuthor, setShowAddAuthor] = useState(false);
+  const [showBookDetails, setShowBookDetails] = useState(false);
 
   return (
     <Container>
@@ -12,7 +13,7 @@ const App = () => {
         <h1>Readers Inventory</h1>
         <h4>Your book management website!</h4>
         <Button
-          variant='outline-primary'
+          variant='primary'
           size='lg'
           className='add-btn'
           onClick={() => setShowAddBook(true)}
@@ -20,7 +21,7 @@ const App = () => {
           Add book
         </Button>
         <Button
-          variant='outline-success'
+          variant='success'
           size='lg'
           className='add-btn ml-3'
           onClick={() => setShowAddAuthor(true)}
@@ -33,7 +34,11 @@ const App = () => {
         show={showAddAuthor}
         handleClose={() => setShowAddAuthor(false)}
       />
-      <BooksList />
+      {showBookDetails ? (
+        <h1>details</h1>
+      ) : (
+        <BooksList showDetails={() => setShowBookDetails(true)} />
+      )}
     </Container>
   );
 };

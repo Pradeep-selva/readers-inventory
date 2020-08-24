@@ -1,3 +1,7 @@
+html body {
+  background: #241716;
+}
+
 .add-btn {
   padding: 0;
   margin-top: 2rem;
