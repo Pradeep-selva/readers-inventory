@@ -1,23 +1,20 @@
 import React, { useState } from "react";
 import { graphql } from "react-apollo";
-import compose from "lodash.flowright";
-import { getAuthorsQuery, addBookMutation, getBooksQuery } from "../../graphql";
+import { addAuthorMutation, getAuthorsQuery } from "../../graphql";
 import { Modal, Form, Row, Col, Button, Toast } from "react-bootstrap";
 
-const AddBook = ({ show, getAuthorsQuery, addBookMutation, handleClose }) => {
+const AddAuthor = ({ show, mutate, handleClose }) => {
   const [name, setName] = useState("");
-  const [genre, setGenre] = useState("");
-  const [authorID, setAuthorID] = useState("");
+  const [age, setAge] = useState("");
   const [toastShow, setToastShow] = useState(false);
 
   const handleSubmit = () => {
-    addBookMutation({
+    mutate({
       variables: {
         name,
-        genre,
-        authorID
+        age: parseInt(age)
       },
-      refetchQueries: [{ query: getBooksQuery }]
+      refetchQueries: [{ query: getAuthorsQuery }]
     });
 
     handleClose();
@@ -34,12 +31,12 @@ const AddBook = ({ show, getAuthorsQuery, addBookMutation, handleClose }) => {
           <Form>
             <Form.Group as={Row} controlId='formHorizontalEmail'>
               <Form.Label column sm={2}>
-                Title
+                Name
               </Form.Label>
               <Col sm={10}>
                 <Form.Control
                   type='text'
-                  placeholder="Enter the book's title"
+                  placeholder="Enter the Author's name"
                   onChange={(event) => setName(event.target.value)}
                 />
               </Col>
@@ -47,33 +44,14 @@ const AddBook = ({ show, getAuthorsQuery, addBookMutation, handleClose }) => {
 
             <Form.Group as={Row} controlId='formHorizontalPassword'>
               <Form.Label column sm={2}>
-                Genre
+                Age
               </Form.Label>
               <Col sm={10}>
                 <Form.Control
                   type='text'
-                  placeholder="Enter the book's genre"
-                  onChange={(event) => setGenre(event.target.value)}
+                  placeholder="Enter the Author's age"
+                  onChange={(event) => setAge(event.target.value)}
                 />
-              </Col>
-            </Form.Group>
-            <Form.Group as={Row}>
-              <Form.Label column sm={2}>
-                Author
-              </Form.Label>
-              <Col sm={10}>
-                <Form.Control
-                  as='select'
-                  onChange={(event) => setAuthorID(event.target.value)}
-                >
-                  <option>Select an author...</option>
-                  {!getAuthorsQuery.loading &&
-                    getAuthorsQuery.authors.map((author) => (
-                      <option key={author.id} value={author.id}>
-                        {author.name}
-                      </option>
-                    ))}
-                </Form.Control>
               </Col>
             </Form.Group>
           </Form>
@@ -83,7 +61,7 @@ const AddBook = ({ show, getAuthorsQuery, addBookMutation, handleClose }) => {
             Cancel
           </Button>
           <Button variant='primary' onClick={handleSubmit}>
-            Add book
+            Add Author
           </Button>
         </Modal.Footer>
       </Modal>
@@ -99,13 +77,10 @@ const AddBook = ({ show, getAuthorsQuery, addBookMutation, handleClose }) => {
           left: "45vw"
         }}
       >
-        <Toast.Body>Succesfully added your book!</Toast.Body>
+        <Toast.Body>Succesfully added the author!</Toast.Body>
       </Toast>
     </>
   );
 };
 
-export default compose(
-  graphql(getAuthorsQuery, { name: "getAuthorsQuery" }),
-  graphql(addBookMutation, { name: "addBookMutation" })
-)(AddBook);
+export default graphql(addAuthorMutation)(AddAuthor);
