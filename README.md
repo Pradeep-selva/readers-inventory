@@ -25,8 +25,8 @@ Install dependencies with -
 
 ## Screenshots
 
-![img](.client/public/main.png)
+![img](./client/public/main.png)
 
 ---
 
-![img](.client/public/details.png)
+![img](./client/public/details.png)
