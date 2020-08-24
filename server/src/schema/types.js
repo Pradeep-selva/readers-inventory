@@ -6,8 +6,6 @@ const {
   GraphQLList
 } = require("graphql");
 const { Author, Book } = require("../models");
-const _ = require("lodash");
-const config = require("./tempconfig");
 
 const BookType = new GraphQLObjectType({
   name: "Book",
@@ -18,7 +16,7 @@ const BookType = new GraphQLObjectType({
     author: {
       type: AuthorType,
       resolve(parents, args) {
-        return _.find(config.authors, { id: parents.authorID });
+        return null;
       }
     }
   })
@@ -33,7 +31,7 @@ const AuthorType = new GraphQLObjectType({
     books: {
       type: GraphQLList(BookType),
       resolve(parent, args) {
-        return _.filter(config.books, { authorID: parent.id });
+        return null;
       }
     }
   })

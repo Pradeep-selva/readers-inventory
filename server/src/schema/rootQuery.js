@@ -1,8 +1,6 @@
 const { GraphQLObjectType, GraphQLID, GraphQLList } = require("graphql");
-const _ = require("lodash");
 const { BookType, AuthorType } = require("./types");
 const { Author, Book } = require("../models");
-const config = require("./tempconfig");
 
 module.exports = new GraphQLObjectType({
   name: "RootQueryType",
@@ -15,7 +13,7 @@ module.exports = new GraphQLObjectType({
         }
       },
       resolve(parent, args) {
-        return _.find(config.books, { id: args.id });
+        return null;
       }
     },
     author: {
@@ -26,19 +24,19 @@ module.exports = new GraphQLObjectType({
         }
       },
       resolve(parent, args) {
-        return _.find(config.authors, { id: args.id });
+        return null;
       }
     },
     books: {
       type: GraphQLList(BookType),
       resolve(parent, args) {
-        return config.books;
+        return null;
       }
     },
     authors: {
       type: GraphQLList(AuthorType),
       resolve(parent, args) {
-        return config.authors;
+        return null;
       }
     }
   }
