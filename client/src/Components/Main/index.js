@@ -16,7 +16,7 @@ const App = () => {
         <Button
           variant='primary'
           size='lg'
-          className='add-btn'
+          className='mt-5'
           onClick={() => setShowAddBook(true)}
         >
           Add book
@@ -24,7 +24,7 @@ const App = () => {
         <Button
           variant='success'
           size='lg'
-          className='add-btn ml-3'
+          className='mt-5 ml-3'
           onClick={() => setShowAddAuthor(true)}
         >
           Add Author
