@@ -2,6 +2,10 @@ html body {
   background: #241716;
 }
 
+.tbn-text {
+  padding: 0.5em 1em;
+}
+
 .spinner {
   margin-left: 45%;
 }

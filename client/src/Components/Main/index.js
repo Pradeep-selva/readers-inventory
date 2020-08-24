@@ -19,7 +19,7 @@ const App = () => {
           className='mt-5'
           onClick={() => setShowAddBook(true)}
         >
-          Add book
+          <span className='btn-text'>Add book</span>
         </Button>
         <Button
           variant='success'
@@ -27,7 +27,7 @@ const App = () => {
           className='mt-5 ml-3'
           onClick={() => setShowAddAuthor(true)}
         >
-          Add Author
+          <span className='btn-text'>Add Author</span>
         </Button>
       </Jumbotron>
       <AddBook show={showAddBook} handleClose={() => setShowAddBook(false)} />
