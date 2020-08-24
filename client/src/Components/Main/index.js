@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Jumbotron, Container, Button } from "react-bootstrap";
-import { BooksList, AddBook, AddAuthor } from "../index";
+import { BooksList, AddBook, AddAuthor, ShowBookDetails } from "../index";
 
 const App = () => {
   const [showAddBook, setShowAddBook] = useState(false);
   const [showAddAuthor, setShowAddAuthor] = useState(false);
   const [showBookDetails, setShowBookDetails] = useState(false);
+  const [bookID, setBookID] = useState(0);
 
   return (
     <Container>
@@ -35,9 +36,15 @@ const App = () => {
         handleClose={() => setShowAddAuthor(false)}
       />
       {showBookDetails ? (
-        <h1>details</h1>
+        <ShowBookDetails
+          bookID={bookID}
+          goBack={() => setShowBookDetails(false)}
+        />
       ) : (
-        <BooksList showDetails={() => setShowBookDetails(true)} />
+        <BooksList
+          showDetails={() => setShowBookDetails(true)}
+          setBookID={(id) => setBookID(id)}
+        />
       )}
     </Container>
   );

@@ -3,7 +3,12 @@ import { graphql } from "react-apollo";
 import { getBooksQuery } from "../../graphql";
 import { Button } from "react-bootstrap";
 
-const BooksList = ({ data, showDetails }) => {
+const BooksList = ({ data, showDetails, setBookID }) => {
+  const handleShow = (id) => {
+    setBookID(id);
+    showDetails();
+  };
+
   return (
     <>
       {data.loading ? (
@@ -15,7 +20,7 @@ const BooksList = ({ data, showDetails }) => {
             size='lg'
             className='mr-5 mb-5'
             key={book.id}
-            onClick={showDetails}
+            onClick={() => handleShow(book.id)}
           >
             {book.name}
           </Button>
