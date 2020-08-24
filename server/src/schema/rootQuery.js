@@ -1,6 +1,7 @@
 const { GraphQLObjectType, GraphQLID, GraphQLList } = require("graphql");
 const _ = require("lodash");
 const { BookType, AuthorType } = require("./types");
+const { Author, Book } = require("../models");
 const config = require("./tempconfig");
 
 module.exports = new GraphQLObjectType({

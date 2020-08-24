@@ -5,6 +5,7 @@ const {
   GraphQLInt,
   GraphQLList
 } = require("graphql");
+const { Author, Book } = require("../models");
 const _ = require("lodash");
 const config = require("./tempconfig");
 
